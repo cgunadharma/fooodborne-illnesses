@@ -1,0 +1,68 @@
+---
+title: "Avg Temperature in Seattle"
+author: "Brenden Lasola "
+date: "2/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(kableExtra)
+city_temperature <- read.csv("city_temperature.csv")
+
+```
+
+```{r}
+# Monthly mean temperature for 2019
+monthly_temp_2019 <- city_temperature %>%
+  filter(City == "Seattle", Year == "2019") %>%
+  group_by(Month) %>%
+  summarize (mean_temp = round(mean(AvgTemperature),1))
+
+```
+
+```{r}
+# Monthly mean temperature for 1995
+monthly_temp_1995 <- city_temperature %>%
+  filter(City == "Seattle", Year == "1995") %>%
+  group_by(Month) %>%
+  summarize(Mean_Temp = round(mean(AvgTemperature),1))
+```
+
+```{r}
+# Max temperature 1995
+max_1995 <- city_temperature %>%
+  filter(City == "Seattle", Year == "1995") %>%
+  group_by(Month) %>%
+  summarize(max_temp = round(max(AvgTemperature),1))
+
+```
+
+```{r}
+# Max temperature 2019
+max_2019 <- city_temperature %>%
+  filter(City == "Seattle", Year == "2019") %>%
+  group_by(Month) %>%
+  summarize(max_temp = round(max(AvgTemperature),1))
+```
+
+```{r}
+# Summary Table
+months <- c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+mean_temp_1995 <-monthly_temp_1995$Mean_Temp
+mean_temp_2019 <-monthly_temp_2019$mean_temp
+max_temp_1995 <- max_1995$max_temp
+max_temp_2019 <- max_2019$max_temp
+
+summary_table <- data.frame(months, mean_temp_1995,mean_temp_2019,max_temp_1995,max_temp_2019)
+
+```
+
+```{r}
+summary_table %>%
+  knitr::kable(col.names = c("Months", "Mean Temp - 1995", "Mean Temp - 2019", "Max Temp - 1995", "Max Temp - 2019"), align = "l", unit = 1, caption = "Comparing mean and max temperature in Seattle during 1995 and 2019" ) %>% kable_minimal()
+```
+
+
