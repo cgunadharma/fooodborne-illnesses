@@ -34,7 +34,7 @@ summary_info$recent_highest_ave_temp <- data %>%
   pull(AvgTemperature)
 
 # Where is the most recent highest average temperature found? `place_recent_highest`
-summary_info$recent_highest_ave_temp <- data %>%
+summary_info$place_recent_highest <- data %>%
   filter(Year == max(Year, na.rm = T)) %>%
   filter(Month == max(Month, na.rm = T)) %>%
   filter(Day == max(Day, na.rm = T)) %>%
