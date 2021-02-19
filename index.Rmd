@@ -1,0 +1,86 @@
+---
+title: "Climate Change Report"
+author: "Clarissa, Quynh, Brendan, Ethan"
+date: "2/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(kableExtra)
+library(ggplot2)
+city_temperature <- read.csv("city_temperature.csv")
+source("summary.R")
+source("Table.R")
+source("exploratory_analysis_chart_a.R")
+source("exploratory_analysis_chart_c.R")
+```
+## Introduction 
+
+The data set, [Daily Temperatures of Major Cities](https://www.kaggle.com/sudalairajkumar/daily-temperature-of-major-cities), was found on Kaggle and was collected by a data scientist at H2O.ai, an open source software company in Silicon Valley.  There are 1,048,575 observations in this data set with eight features: region, country, start, city, month, day, year, and average temperature. This data set will go a long way in determining where the highest changes in temperature occurred and will allow us to measure multiple climate change variables. We will be able to  answer questions such as: Which states have experienced the highest temperature change over time? Based on current temperature patterns, which cities will be heavily impacted by climate change and global warming in the near future? 
+
+## Summary
+
+Our data analysis has extracted certain observations that have given us the following variables. The highest average temperature is `r summary_info$max_ave_temp` degrees fahrenheit. The highest average temperature occurred on `r summary_info$date_max_temp`. The highest average temperature was found in `r summary_info$place_max_temp`. The most recent highest average temperature was `r summary_info$recent_highest_ave_temp`. This max average temperature occurred in `r summary_info$place_recent_highest`.
+
+
+## Tables 
+
+```{r, echo=FALSE, message=FALSE}
+summary_table %>%
+  knitr::kable(col.names = c("Months", "Mean Temp - 1995", "Mean Temp - 2019", "Max Temp - 1995", "Max Temp - 2019"), align = "l", unit = 1, caption = "Comparing mean and max temperature in Seattle during 1995 and 2019" ) %>% kable_minimal()
+```
+
+The table displayed includes key information that compares the average and maximum monthly temperatures for Seattle, Washington in the year 1995 and 2019. We have included the information in this table as it conveys that the trends in temperature in Seattle throughout the entire year. As shown in the table, temperatures in 1995 were more consistent as it gradually became hotter in the June and July and then became colder. However, in 2019, temperatures had more variation which can further imply the correlation of the effects of climate change.
+
+## Charts 
+
+```{r, echo=FALSE, message=FALSE}
+city_comparison <- city_temp %>%
+  filter(
+    State == "Washington" | State == "Oregon" | State == "California",
+    Year == 2015,
+    Month == 3,
+    Day == 7
+  ) %>%
+  select(City, AvgTemperature)
+
+ggplot(data = seattle) +
+  geom_line(
+    mapping = aes(x = Day, y = AvgTemperature),
+    color = "blue"
+    ) + 
+  scale_x_continuous() +
+  scale_y_continuous(limits = c(0, 100)) +
+  labs (
+    title = "Tempature in Seattle, WA in June, 2016",
+    x = "Day",
+    y = "Average Temperature (F)"
+  )
+```
+
+This line graph is intended to show the relationship between days (in June of 2016) and average temperature variation in Seattle to show how temperature trends have changed.
+
+```{r, echo=FALSE, message=FALSE}
+ggplot(data = city_comparison) +
+  geom_col(
+    mapping = aes(x = City, y = AvgTemperature),
+    color = "red"
+  ) + 
+  scale_x_discrete() +
+  scale_y_continuous() +
+  labs (
+    title = "Temperature in Washington, Oregon, and California on March 7th, 2015",
+    x = "City",
+    y = "Average Temperature (F)"
+  )
+```
+
+This chart is a bar chart that compares cities the average temperatures in cities in Washington, Oregon and California on March 7th, 2015.
+
+
+
+
+This chart conveys the temperatures in these cities on a given day.
