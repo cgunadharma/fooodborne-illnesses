@@ -10,7 +10,7 @@ city_comparison <- city_temp %>%
   select(City, AvgTemperature)
 
 ggplot(data = city_comparison) +
-  geom_col(
+  geom_point(
     mapping = aes(x = City, y = AvgTemperature),
     color = "red"
   ) + 

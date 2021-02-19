@@ -61,11 +61,11 @@ ggplot(data = seattle) +
   )
 ```
 
-This line graph is intended to show the relationship between days (in June of 2016) and average temperature variation in Seattle to show how temperature trends have changed.
+This line graph is intended to show the relationship between days (in June of 2016) and average temperature variation in Seattle to show how temperature trends have changed over time.
 
 ```{r, echo=FALSE, message=FALSE}
 ggplot(data = city_comparison) +
-  geom_col(
+  geom_point(
     mapping = aes(x = City, y = AvgTemperature),
     color = "red"
   ) + 
@@ -78,9 +78,22 @@ ggplot(data = city_comparison) +
   )
 ```
 
-This chart is a bar chart that compares cities the average temperatures in cities in Washington, Oregon and California on March 7th, 2015.
+This chart is a scatterplot that compares the average temperatures in cities in Washington, Oregon and California on March 7th, 2015.
 
+```{r, echo=FALSE, message=FALSE}
+max_temp_year <- city_temp %>%
+  filter(State == "Washington" | State == "Oregon" | State == "California") %>%
+  group_by(City) %>%
+  filter(AvgTemperature == max(AvgTemperature)) %>%
+  group_by(Year)
+  
+ggplot(max_temp_year, aes(x=max_temp_year$Year)) +
+  geom_bar() +
+  labs(
+    title = "Box Plot of Hottest Year in West Coast Cities",
+    x = "Year",
+    y = "# of cities that had their hottest day"
+  )
+```
 
-
-
-This chart conveys the temperatures in these cities on a given day.
+This barchart conveys the which years certain West Coast cities have experienced their hottest temperatures in  on a given day.

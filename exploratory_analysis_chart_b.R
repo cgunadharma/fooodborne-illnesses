@@ -4,21 +4,17 @@ max_temp_year <- city_temp %>%
   filter(State == "Washington" | State == "Oregon" | State == "California") %>%
   group_by(City) %>%
   filter(AvgTemperature == max(AvgTemperature)) %>%
-  group_by(Year) %>%
-  test <- count(Year)
-
-ggplot(data = max_temp_year) +
-  geom_col(
-    mapping = aes(x = Year, y = test),
-    color = "yellow"
-  ) + 
-  scale_x_discrete() +
-  scale_y_continuous() +
-  labs (
-    title = "Tempature in Seattle, WA in June, 2016",
-    x = "Day",
-    y = "Average Temperature (F)"
+  group_by(Year) 
+  
+ggplot(max_temp_year, aes(x=max_temp_year$Year)) +
+  geom_bar() +
+  labs(
+    title = "Box Plot of Hottest Year in West Coast Cities",
+    x = "Year",
+    y = "# of cities that had their hottest day"
   )
+  
+
   
 
 
