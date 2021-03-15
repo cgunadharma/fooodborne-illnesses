@@ -28,12 +28,12 @@ col_names <- colnames(city_temp)
 page_one <-   page_one <- tabPanel(
   "Introduction",
   mainPanel(
-    p("About this project:"),
-    p("**Climate change** has a major impact on every person's life regardless of ethnicity, race, nationality, age, gender, job etc. 
+    img(src = "photo-1.jpg", align = "left"),
+    h2("About this project:"),
+    p("Climate change has a major impact on every person's life regardless of ethnicity, race, nationality, age, gender, job etc. 
       In order to prepare for the future, there is a dire need right now for a sense of acknowledgement within populations. 
       Climate change has a lot of moving parts to it and can be daunting to understand so we believe that manipulating data 
-      may make it easier for us and others to absorb the individual impact it has on everyone's lives.The data set, 
-      ([Daily Temperatures of Major Cities](https://www.kaggle.com/sudalairajkumar/daily-temperature-of-major-cities)), 
+      may make it easier for us and others to absorb the individual impact it has on everyone's lives.The data set 
       was found on Kaggle and was collected by a data scientist at H2O.ai, an open source software company in Silicon Valley.  
       There are 1,048,575 observations in this data set with eight features: region, country, start, city, month, day, year, and average temperature. 
       This data set will go a long way in determining where the highest changes in temperature occurred and will allow us to measure multiple climate change variables. 
@@ -103,7 +103,10 @@ page_three <- tabPanel(
     mainPanel(
       "Average Temp in West Coast",
       plotOutput(outputId = "line_data"),
-      p("Average temperature in the West Coast over time")
+      p("Looking at the charts, the average temperature of all three states are fairly similar over the years.
+        There is a downward trend at the end of chart for all three but that isn' necessarily enough to solely blame on
+        climate change based on how erradic the overall graph is. This data set is only goes back to 1995, not really giving
+        a complete spectrum of how global temperatures or temperatures in the west coast are changing over time.")
     )
   )
 )
