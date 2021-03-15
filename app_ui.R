@@ -1,13 +1,4 @@
-library(shiny)
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(shiny)
-
-source("app_server.R")
-
 #Analysis/Re-Shaping dataset
-
 city_temp <- read.csv("city_temperature.csv")
 
 west_coast <- city_temp %>%
@@ -28,7 +19,6 @@ pdx <- city_temp %>%
 west_coast$Washington <- wa$Washington
 west_coast$Oregon <- pdx$Oregon
 
-
 algiers_ave_temp <- city_temp %>%
   filter(City == "Algiers") 
 
@@ -39,7 +29,7 @@ page_one <-   page_one <- tabPanel(
   "Introduction",
   mainPanel(
     p("About this project:"),
-    p(p("**Climate change** has a major impact on every person's life regardless of ethnicity, race, nationality, age, gender, job etc. 
+    p("**Climate change** has a major impact on every person's life regardless of ethnicity, race, nationality, age, gender, job etc. 
       In order to prepare for the future, there is a dire need right now for a sense of acknowledgement within populations. 
       Climate change has a lot of moving parts to it and can be daunting to understand so we believe that manipulating data 
       may make it easier for us and others to absorb the individual impact it has on everyone's lives.The data set, 
@@ -52,7 +42,6 @@ page_one <-   page_one <- tabPanel(
       h3("About Us:"),
       p("Group Members: Clarissa Gunadharma, Quynh Le, Brenden Lasola" )
   )
- )
 )
 
 page_two <- tabPanel(
@@ -139,5 +128,3 @@ ui <- navbarPage(
   page_three, 
   page_four
 )
-
-shinyApp(ui, server)
