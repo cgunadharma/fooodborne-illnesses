@@ -74,7 +74,7 @@ page_two <- tabPanel(
     ### Main panel displays the scatterplot
     mainPanel(
       "Average temp in Algiers",
-      plotOutput(outputId = "scatter"),
+      plotlyOutput(outputId = "scatter"),
       p("The chart is included to show the average temperature in Algiers city
         over years. From the chart, we see that the range of average temperature of 
         Algiers does not significantly change over years.")
@@ -115,7 +115,7 @@ page_four <- tabPanel(
     p("Based on the specific climate change data we analyzed, we were able to learn some key takeaways about climate change variables based on average temperatures in certain cities and countries throughout decades, years and months. 
       Although the overall global temperatures may be rising over time, 
       specific countries like Algiers does not experience a significant amount of temperature change even though global warming is occurring. 
-      Additionally, when honing into temperature trends in Seattle over the years (e.g from 1995 and 2019), temperatures had more variation in 2019 than it did in 1995. Although the data we’ve analyzed has been focused on temperature, 
+      Additionally, when honing into temperature trends in Seattle over the years (e.g from 1995 and 2019), temperatures had more variation in 2019 than it did in 1995. Although the data we have analyzed has been focused on temperature, 
       there is a strong correlation that variation in temperatures are aligned with climate change.")
   )
 )
